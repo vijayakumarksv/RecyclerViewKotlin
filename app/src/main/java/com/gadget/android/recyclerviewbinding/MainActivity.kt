@@ -24,8 +24,13 @@ class MainActivity : AppCompatActivity() {
         recyclerview.adapter = adapter
 
         mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        mainActivityViewModel.getUserData()
-        mainActivityViewModel.userMutableLiveData.observe(this, Observer {userList ->
+        //mainActivityViewModel.getUserData()
+        /*mainActivityViewModel.userMutableLiveData.observe(this, Observer {userList ->
+            userList.forEach {
+                Log.e("MVVM", ""+it.name)
+            }
+        })*/
+        mainActivityViewModel.users.observe(this, Observer {userList ->
             userList.forEach {
                 Log.e("MVVM", ""+it.name)
             }

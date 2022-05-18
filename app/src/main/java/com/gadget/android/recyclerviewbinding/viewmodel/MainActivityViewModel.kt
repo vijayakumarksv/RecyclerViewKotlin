@@ -2,6 +2,7 @@ package com.gadget.android.recyclerviewbinding.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.gadget.android.recyclerviewbinding.model.User
 import com.gadget.android.recyclerviewbinding.repository.UserRepository
@@ -13,7 +14,7 @@ class MainActivityViewModel : ViewModel() {
     private var userRepository = UserRepository()
     var userMutableLiveData: MutableLiveData<List<User>> = MutableLiveData()
 
-    fun getUserData() {
+   /* fun getUserData() {
         viewModelScope.launch {
             var result: List<User>? = null
 
@@ -29,5 +30,11 @@ class MainActivityViewModel : ViewModel() {
             userMutableLiveData.value = result!!
         }
 
+    } */
+
+    //Live data new builder's
+    var users = liveData(Dispatchers.IO) {
+        val result = userRepository.getUserData()
+        emit(result)
     }
 }
